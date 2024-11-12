@@ -12,6 +12,9 @@ poetry install --no-root
 ## Build the package
 
 ```bash
+# create the html sphinx docs
+poetry run task build
+# poetry build the packages
 poetry build -vvv
 ```
 
