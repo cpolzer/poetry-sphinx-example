@@ -6,9 +6,8 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 packages = [
     { include = "source/", format = ["sdist", "wheel"], to = "poetry-sphinx-example" },
-]
-include = [
-    { path = "build/**/*", format = ["sdist", "wheel"] },
+    # This is a hack to include the _build directory in the package: see the `build` task below
+    { include = "_build/", format = ["sdist", "wheel"], to = "poetry-sphinx-example" },
 ]
 exclude = [".git/"]
 
@@ -23,4 +22,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy.tasks]
-build = "poetry run sphinx-build -W --keep-going -b html source/ build/"
+build = "poetry run sphinx-build -W --keep-going -b html source/ _build/ && touch _build/__init__.py"
